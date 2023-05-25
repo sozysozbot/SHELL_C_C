@@ -3,7 +3,7 @@ assert() {
   expected="$1"
   input="$2"
 
-  ./compiler.sh "$input" > tmp.s
+  ./compiler.sh "$input" > tmp.s 2> /dev/null
   cc -o tmp tmp.s
   ./tmp
   actual="$?"
@@ -18,5 +18,6 @@ assert() {
 
 assert 0 0
 assert 42 42
+assert 21 "5+20-4"
 
 echo OK
