@@ -19,12 +19,14 @@ for (( i=0; i<${#foo}; i++ )); do
   elif [[ "$char" = '+' ]]
   then
     echo "        $previous_mnemonics rax, $num_buffer"
+    tokens+=($num_buffer +)
     previous_mnemonics='add'
     num_buffer=''
     echoerr "detected an addition operator"
   elif [[ "$char" = '-' ]]
   then
     echo "        $previous_mnemonics rax, $num_buffer"
+    tokens+=($num_buffer -)
     previous_mnemonics='sub'
     num_buffer=''
     echoerr "detected a subtraction operator"
@@ -35,3 +37,5 @@ done
 
 echo "        $previous_mnemonics rax, $num_buffer"
 echo '        ret'
+tokens+=($num_buffer)
+echoerr ${tokens[@]}
