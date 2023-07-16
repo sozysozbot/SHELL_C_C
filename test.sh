@@ -3,7 +3,7 @@ assert() {
   expected="$1"
   input="$2"
 
-  ./compiler.sh "$input" > tmp.s 2> /dev/null
+  ./compiler.sh "$input" > tmp.s
   cc -o tmp tmp.s
   ./tmp
   actual="$?"
